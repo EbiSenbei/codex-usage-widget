@@ -1,4 +1,5 @@
 using CodexUsageWidget.Infrastructure.Settings;
+using CodexUsageWidget.Domain;
 using CodexUsageWidget.Localization;
 using Forms = System.Windows.Forms;
 
@@ -18,6 +19,9 @@ public sealed class TrayIconService : IDisposable
     private readonly Forms.ToolStripMenuItem _exitItem;
     private System.Drawing.Icon _currentIcon;
     private double? _remainingPercent;
+    private UsageSnapshot? _claudeSnapshot;
+    private bool _claudeStale;
+    private ProviderVisibility _providerVisibility = new();
     private bool _disposed;
 
     public TrayIconService()
@@ -73,7 +77,7 @@ public sealed class TrayIconService : IDisposable
         _notifyIcon = new Forms.NotifyIcon
         {
             Icon = _currentIcon,
-            Text = "Codex Usage Widget",
+            Text = "Agent Usage Widget",
             Visible = true,
             ContextMenuStrip = menu
         };
@@ -139,15 +143,46 @@ public sealed class TrayIconService : IDisposable
     public void UpdateUsage(double? remainingPercent)
     {
         _remainingPercent = remainingPercent;
-        _notifyIcon.Text = remainingPercent is null
-            ? Strings.Get("Tray_Unavailable")
-            : Strings.Format("Tray_Remaining", Math.Round(remainingPercent.Value));
+        UpdateTooltip();
 
-        var nextIcon = UsageIconFactory.Create(remainingPercent);
+        var nextIcon = UsageIconFactory.Create(_providerVisibility.Codex ? remainingPercent : null);
         var previousIcon = _currentIcon;
         _currentIcon = nextIcon;
         _notifyIcon.Icon = nextIcon;
         previousIcon.Dispose();
+    }
+
+    public void UpdateClaudeUsage(UsageSnapshot? snapshot, bool stale)
+    {
+        _claudeSnapshot = snapshot;
+        _claudeStale = stale;
+        UpdateTooltip();
+    }
+
+    private void UpdateTooltip()
+    {
+        var codex = _remainingPercent is null
+            ? Strings.Get("Tray_Unavailable")
+            : Strings.Format("Tray_Remaining", Math.Round(_remainingPercent.Value));
+        var claude = _claudeSnapshot is null
+            ? Strings.Get("Claude_TrayUnavailable")
+            : "Claude: " + string.Join(" / ", _claudeSnapshot.GeneralWindows.Select(window =>
+                $"{(window.WindowDurationMinutes == 300 ? "5h" : "7d")} {Math.Round(window.UsedPercent)}%")) +
+                (_claudeStale ? " · " + Strings.Get("Claude_Stale") : "");
+        var text = string.Join("\n", new[]
+        {
+            _providerVisibility.Codex ? codex : null,
+            _providerVisibility.Claude ? claude : null
+        }.OfType<string>());
+        if (text.Length == 0) { text = Strings.Get("App_Name"); }
+        _notifyIcon.Text = text.Length > 127 ? text[..127] : text;
+    }
+
+    public void SetProviderVisibility(ProviderVisibility preference)
+    {
+        if (_providerVisibility == preference) { return; }
+        _providerVisibility = preference;
+        UpdateUsage(_remainingPercent);
     }
 
     private void StringsOnPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)

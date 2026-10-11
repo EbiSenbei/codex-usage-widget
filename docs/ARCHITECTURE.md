@@ -1,5 +1,34 @@
 # Architecture
 
+## Agent Usage Widget fork
+
+This fork keeps the original Codex app-server integration and adds an independent
+`ClaudeUsageProvider` under `Infrastructure/Claude/`. It reads the existing Windows
+Claude Code OAuth access token without changing credentials and requests only the
+Anthropic usage endpoint. HTTP 429 responses retain their retry deadline even when
+the user refreshes manually. Parsing produces the same domain `UsageSnapshot` type;
+missing windows are omitted rather than synthesized as zero usage.
+
+`App` composes two `UsageMonitor` instances. `MainWindow` renders Claude through
+`ClaudeUsageView` and `ClaudeUsageViewModel`; a failure in either monitor cannot
+block the other. The Claude view retains the last successful snapshot with a stale
+message on failure. Monitor disposal cancels and waits for active reads before
+disposing transport resources. The original Codex details and reset use cases are
+kept separate from Claude.
+
+Japanese uses the existing .NET resource and language preference mechanism.
+`AlwaysOnTopPreferenceStore` persists the desktop widget's z-order preference.
+`ProviderVisibilityStore` saves independent Codex/Claude visibility flags. The
+desktop widget resizes immediately and tray content follows the selection;
+hidden providers continue to refresh. Both flags can be off while Settings remains
+accessible. Missing or malformed preferences default to both providers visible.
+The executable, app-data folder, startup registration, mutex, and optional activity
+pipe use `AgentUsageWidget` identities, preserving a separately installed original
+Codex widget. The optional hooks recognize this fork's handlers, not the original's.
+Preview builds use sample data for both providers and an in-memory startup store.
+
+The following sections describe the inherited Codex-specific implementation.
+
 The solution uses explicit composition in `App.xaml.cs` and keeps framework,
 application, domain, and infrastructure responsibilities separate without a
 dependency-injection package.

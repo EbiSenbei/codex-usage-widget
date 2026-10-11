@@ -1,11 +1,16 @@
 using CodexUsageWidget.Application;
 using CodexUsageWidget.Domain;
 using CodexUsageWidget.Views.ViewModels;
+using System.Globalization;
+using CodexUsageWidget.Localization;
 
 namespace CodexUsageWidget.Tests;
 
+[Collection("Localization")]
 public sealed class UsageWidgetViewModelTests
 {
+    public UsageWidgetViewModelTests() => Strings.Current.SetCulture(
+        CultureInfo.GetCultureInfo("en-US"), CultureInfo.GetCultureInfo("en-US"));
     [Fact]
     public void FromSnapshotUsesMostConstrainedGeneralWindowForHeadline()
     {
@@ -113,7 +118,7 @@ public sealed class UsageWidgetViewModelTests
             window,
             TimeFormatPreference.TwelveHour);
 
-        Assert.Equal("Local only · updated 2:05:09 PM", viewModel.UpdatedText);
+        Assert.Equal("Codex updated 2:05:09 PM", viewModel.UpdatedText);
     }
 
     [Fact]

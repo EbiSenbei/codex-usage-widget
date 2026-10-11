@@ -20,6 +20,12 @@ public partial class MainWindow : Window
     private const double DetailedHeight = 620d;
 
     private readonly UsageMonitor _usageMonitor;
+    private readonly UsageMonitor _claudeMonitor;
+    private readonly AlwaysOnTopPreferenceStore _alwaysOnTopStore;
+    private readonly ProviderVisibilityStore _providerVisibilityStore;
+    private ProviderVisibility _providerVisibility;
+    private UsageSnapshot? _claudeSnapshot;
+    private string? _claudeErrorKey;
     private readonly RateLimitResetUseCase _resetUseCase;
     private readonly CodexActivityMonitor _activityMonitor;
     private readonly IActivityHookSetupService _activityHookSetupService;
@@ -62,9 +68,16 @@ public partial class MainWindow : Window
         TrayIconService trayIcon,
         AppThemeController themeController,
         AppLanguageController languageController,
-        TimeFormatPreferenceStore timeFormatPreferenceStore)
+        TimeFormatPreferenceStore timeFormatPreferenceStore,
+        UsageMonitor claudeMonitor,
+        AlwaysOnTopPreferenceStore alwaysOnTopStore,
+        ProviderVisibilityStore providerVisibilityStore)
     {
         _usageMonitor = usageMonitor;
+        _claudeMonitor = claudeMonitor;
+        _alwaysOnTopStore = alwaysOnTopStore;
+        _providerVisibilityStore = providerVisibilityStore;
+        _providerVisibility = providerVisibilityStore.Load();
         _resetUseCase = resetUseCase;
         _activityMonitor = activityMonitor;
         _activityHookSetupService = activityHookSetupService;
@@ -84,6 +97,8 @@ public partial class MainWindow : Window
         _widgetVisibility = new WidgetVisibilityController(() => IsVisible, ShowWidget, Hide);
 
         InitializeComponent();
+        Topmost = alwaysOnTopStore.Load();
+        RenderClaude();
         _taskbarLabel.SetTimeFormatPreference(_timeFormatPreference);
         DataContext = _viewModel;
         ApplyDensity(repositionBottomEdge: false);
@@ -101,13 +116,24 @@ public partial class MainWindow : Window
         _usageMonitor.RefreshStarted += UsageMonitorOnRefreshStarted;
         _usageMonitor.SnapshotUpdated += UsageMonitorOnSnapshotUpdated;
         _usageMonitor.RefreshFailed += UsageMonitorOnRefreshFailed;
+        _claudeMonitor.SnapshotUpdated += snapshot => Dispatcher.BeginInvoke(() =>
+        {
+            _claudeSnapshot = snapshot;
+            _claudeErrorKey = null;
+            RenderClaude();
+        });
+        _claudeMonitor.RefreshFailed += key => Dispatcher.BeginInvoke(() =>
+        {
+            _claudeErrorKey = key;
+            RenderClaude();
+        });
         DetailedView.ResetUseRequested += DetailedViewOnResetUseRequested;
         _activityMonitor.ActivityChanged += ActivityMonitorOnActivityChanged;
         _taskbarLabel.OpenRequested += (_, _) =>
             Dispatcher.BeginInvoke(_widgetVisibility.Show, DispatcherPriority.ApplicationIdle);
         _taskbarLabel.ToggleRequested += (_, _) => _widgetVisibility.Toggle();
         _taskbarLabel.RefreshRequested += (_, _) =>
-            Dispatcher.BeginInvoke(() => _ = _usageMonitor.RefreshAsync());
+            Dispatcher.BeginInvoke(() => _ = RefreshAllAsync());
         _taskbarLabel.SettingsRequested += (_, _) => Dispatcher.BeginInvoke(ShowSettings);
         _taskbarLabel.ActivityPreviewChanged += (_, _) =>
             Dispatcher.BeginInvoke(() =>
@@ -123,7 +149,7 @@ public partial class MainWindow : Window
 
         _trayIcon.OpenRequested += (_, _) => Dispatcher.BeginInvoke(_widgetVisibility.Show);
         _trayIcon.RefreshRequested += (_, _) =>
-            Dispatcher.BeginInvoke(() => _ = _usageMonitor.RefreshAsync());
+            Dispatcher.BeginInvoke(() => _ = RefreshAllAsync());
         _trayIcon.SettingsRequested += (_, _) => Dispatcher.BeginInvoke(ShowSettings);
         _trayIcon.DesktopModeRequested += (_, _) =>
             Dispatcher.BeginInvoke(() => SetDisplayMode(WidgetDisplayMode.DesktopWidget));
@@ -146,12 +172,20 @@ public partial class MainWindow : Window
         _taskbarLabel.SetSystemTheme(_themeController.SystemTheme);
         SetDisplayedLimitPreferenceState(_displayedLimitPreference);
         SetStartupRegistrationState(_startupRegistration.IsEnabled);
-        if (_displayMode == WidgetDisplayMode.TaskbarIndicator)
+        if (_displayMode == WidgetDisplayMode.TaskbarIndicator && _providerVisibility.Codex)
         {
             _taskbarLabel.ShowLabel();
         }
 
-        await _usageMonitor.StartAsync();
+        await Task.WhenAll(_usageMonitor.StartAsync(), _claudeMonitor.StartAsync());
+    }
+
+    private Task RefreshAllAsync() => Task.WhenAll(_usageMonitor.RefreshAsync(), _claudeMonitor.RefreshAsync());
+
+    private void RenderClaude()
+    {
+        ClaudeView.DataContext = ClaudeUsageViewModel.Create(_claudeSnapshot, _claudeErrorKey, _timeFormatPreference);
+        _trayIcon.UpdateClaudeUsage(_claudeSnapshot, _claudeErrorKey is not null);
     }
 
     private void UsageMonitorOnRefreshStarted() =>
@@ -258,18 +292,27 @@ public partial class MainWindow : Window
         var previousBottom = IsLoaded ? Top + ActualHeight : 0d;
         var workArea = SystemParameters.WorkArea;
         var desiredHeight = _density == WidgetDensity.Detailed
-            ? Math.Min(DetailedHeight, Math.Max(CompactMaximumHeight, workArea.Height - 40d))
+            ? Math.Min(DetailedHeight, Math.Max(CompactMaximumHeight, workArea.Height - 40d - (_providerVisibility.Claude ? 205d : 0d)))
             : CalculateCompactHeight();
+        if (!_providerVisibility.Codex) { desiredHeight = 110d; }
+        desiredHeight += _providerVisibility.Claude ? 205d : !_providerVisibility.Codex ? 56d : 0d;
 
         MinHeight = desiredHeight;
         Height = desiredHeight;
-        CompactView.Visibility = _density == WidgetDensity.Compact
+        CompactView.Visibility = _providerVisibility.Codex && _density == WidgetDensity.Compact
             ? Visibility.Visible
             : Visibility.Collapsed;
-        DetailedView.Visibility = _density == WidgetDensity.Detailed
+        DetailedView.Visibility = _providerVisibility.Codex && _density == WidgetDensity.Detailed
             ? Visibility.Visible
             : Visibility.Collapsed;
         DensityGlyphRotation.Angle = _density == WidgetDensity.Detailed ? 180d : 0d;
+        CodexHeader.Visibility = _providerVisibility.Codex ? Visibility.Visible : Visibility.Collapsed;
+        CodexUpdatedText.Visibility = CodexHeader.Visibility;
+        DensityButton.Visibility = CodexHeader.Visibility;
+        ClaudeView.Visibility = _providerVisibility.Claude ? Visibility.Visible : Visibility.Collapsed;
+        NoProvidersText.Visibility = !_providerVisibility.Codex && !_providerVisibility.Claude
+            ? Visibility.Visible : Visibility.Collapsed;
+        _trayIcon.SetProviderVisibility(_providerVisibility);
         DensityButton.ToolTip = _density == WidgetDensity.Detailed
             ? Strings.Get("Main_ShowCompact")
             : Strings.Get("Main_ShowDetails");
@@ -360,9 +403,14 @@ public partial class MainWindow : Window
                 _languageController.Preference,
                 _timeFormatPreference)
             {
-                Owner = this
+                Owner = this,
+                ShowInTaskbar = ShowInTaskbar
             };
             _settingsWindow = window;
+            window.SetAlwaysOnTop(Topmost);
+            window.SetProviderVisibility(_providerVisibility);
+            window.ProviderVisibilityChanged += SetProviderVisibility;
+            window.AlwaysOnTopChanged += SetAlwaysOnTop;
             window.ThemePreferenceChanged += _themeController.SetPreference;
             window.AccentPaletteChanged += _themeController.SetAccentPalette;
             window.WidgetDensityChanged += SetDensity;
@@ -399,7 +447,7 @@ public partial class MainWindow : Window
             return;
         }
 
-        _taskbarLabel.ShowLabel();
+        if (_providerVisibility.Codex) { _taskbarLabel.ShowLabel(); }
         Hide();
     }
 
@@ -446,6 +494,7 @@ public partial class MainWindow : Window
     private void SetLanguagePreference(LanguagePreference preference)
     {
         _languageController.SetPreference(preference);
+        RenderClaude();
         ApplyDensity(repositionBottomEdge: false);
         if (_latestSnapshot is { } snapshot)
         {
@@ -462,6 +511,7 @@ public partial class MainWindow : Window
         _timeFormatPreference = preference;
         _timeFormatPreferenceStore.Save(preference);
         _taskbarLabel.SetTimeFormatPreference(preference);
+        RenderClaude();
         if (_latestSnapshot is { } snapshot)
         {
             RenderSnapshot(snapshot);
@@ -584,7 +634,7 @@ public partial class MainWindow : Window
     }
 
     private async void RefreshButton_OnClick(object sender, RoutedEventArgs e) =>
-        await _usageMonitor.RefreshAsync();
+        await RefreshAllAsync();
 
     private void DensityButton_OnClick(object sender, RoutedEventArgs e) =>
         SetDensity(
@@ -636,11 +686,41 @@ public partial class MainWindow : Window
         _taskbarLabel.HideLabel();
         _taskbarLabel.CloseLabel();
         _trayIcon.Dispose();
+        _claudeMonitor.DisposeAsync().AsTask().GetAwaiter().GetResult();
         _activityMonitor.DisposeAsync().AsTask().GetAwaiter().GetResult();
         _usageMonitor.DisposeAsync().AsTask().GetAwaiter().GetResult();
         if (closeAction == MainWindowCloseAction.CloseAndShutdownApplication)
         {
             System.Windows.Application.Current.Shutdown();
         }
+    }
+
+    private void SetAlwaysOnTop(bool enabled)
+    {
+        if (_alwaysOnTopStore.TrySave(enabled))
+        {
+            Topmost = enabled;
+            return;
+        }
+
+        _settingsWindow?.SetAlwaysOnTop(Topmost);
+        System.Windows.MessageBox.Show(this, Strings.Get("Settings_SaveError"), Strings.Get("App_Name"),
+            MessageBoxButton.OK, MessageBoxImage.Warning);
+    }
+
+    private void SetProviderVisibility(ProviderVisibility preference)
+    {
+        if (_providerVisibilityStore.TrySave(preference))
+        {
+            _providerVisibility = preference;
+            ApplyDensity(repositionBottomEdge: true);
+            if (!_providerVisibility.Codex) { _taskbarLabel.HideLabel(); }
+            else if (_displayMode == WidgetDisplayMode.TaskbarIndicator) { _taskbarLabel.ShowLabel(); }
+            return;
+        }
+
+        _settingsWindow?.SetProviderVisibility(_providerVisibility);
+        System.Windows.MessageBox.Show(this, Strings.Get("Settings_SaveError"), Strings.Get("App_Name"),
+            MessageBoxButton.OK, MessageBoxImage.Warning);
     }
 }

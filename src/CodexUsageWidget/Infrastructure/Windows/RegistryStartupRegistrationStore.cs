@@ -6,7 +6,7 @@ namespace CodexUsageWidget.Infrastructure.Windows;
 public sealed class RegistryStartupRegistrationStore : IStartupRegistrationStore
 {
     private const string RunKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Run";
-    private const string ValueName = "CodexUsageWidget";
+    private const string ValueName = "AgentUsageWidget";
 
     public string? LoadCommand()
     {

@@ -7,6 +7,8 @@ public sealed class LanguagePreferenceResolverTests
 {
     [Theory]
     [InlineData("en-US", LanguagePreference.English)]
+    [InlineData("ja-JP", LanguagePreference.Japanese)]
+    [InlineData("ja", LanguagePreference.Japanese)]
     [InlineData("fr-FR", LanguagePreference.English)]
     [InlineData("zh-TW", LanguagePreference.English)]
     [InlineData("zh-HK", LanguagePreference.English)]
@@ -28,6 +30,7 @@ public sealed class LanguagePreferenceResolverTests
 
     [Theory]
     [InlineData(LanguagePreference.English, "zh-CN")]
+    [InlineData(LanguagePreference.Japanese, "en-US")]
     [InlineData(LanguagePreference.SimplifiedChinese, "en-US")]
     public void ResolveExplicitPreferenceOverridesWindowsCulture(
         LanguagePreference preference,

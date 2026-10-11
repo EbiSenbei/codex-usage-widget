@@ -10,7 +10,7 @@ $solution = Join-Path $repositoryRoot 'CodexUsageWidget.slnx'
 $project = Join-Path $repositoryRoot 'src\CodexUsageWidget\CodexUsageWidget.csproj'
 $releaseRoot = [IO.Path]::GetFullPath((Join-Path $repositoryRoot 'artifacts\release'))
 $publishDirectory = [IO.Path]::GetFullPath((Join-Path $releaseRoot $Runtime))
-$archivePath = Join-Path $releaseRoot "codex-usage-widget-$Runtime.zip"
+$archivePath = Join-Path $releaseRoot "agent-usage-widget-$Runtime.zip"
 
 if (-not $publishDirectory.StartsWith($releaseRoot, [StringComparison]::OrdinalIgnoreCase)) {
     throw "Unsafe publish directory: $publishDirectory"

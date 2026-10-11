@@ -46,6 +46,6 @@ jobs:
       - name: Upload portable build
         uses: actions/upload-artifact@v7
         with:
-          name: codex-usage-widget-win-x64
+          name: agent-usage-widget-win-x64
           path: .\artifacts\ci\win-x64\
           if-no-files-found: error

@@ -1,5 +1,11 @@
 # Releasing
 
+This fork packages `AgentUsageWidget.exe` in
+`artifacts/release/agent-usage-widget-win-x64.zip`. The assembly name changed;
+the project path and version source remain `src/CodexUsageWidget/CodexUsageWidget.csproj`.
+Local packaging does not publish anything. Do not reuse upstream tags for a modified
+fork release; choose a new version and tag when a release is explicitly requested.
+
 GitHub Releases are created automatically from version tags. The project version
 in `src/CodexUsageWidget/CodexUsageWidget.csproj` is the release version source of
 truth.

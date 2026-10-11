@@ -34,7 +34,7 @@ public sealed class CodexActivityHookSetupServiceTests : IDisposable
     {
         Directory.CreateDirectory(_directory);
         var legacyCommand =
-            $"\"{Path.Combine(_directory, "CodexUsageWidget.exe")}\" --codex-activity-hook";
+            $"\"{Path.Combine(_directory, "AgentUsageWidget.exe")}\" --codex-activity-hook";
         File.WriteAllText(HooksPath, $$"""
             {
               "hooks": {

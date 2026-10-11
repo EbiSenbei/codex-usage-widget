@@ -7,6 +7,8 @@ namespace CodexUsageWidget.Tests;
 [Collection("Localization")]
 public sealed class UsageTextFormatterTests : IDisposable
 {
+    public UsageTextFormatterTests() => Strings.Current.SetCulture(
+        CultureInfo.GetCultureInfo("en-US"), CultureInfo.GetCultureInfo("en-US"));
     [Theory]
     [InlineData("codex executable not found", "Codex CLI was not found on PATH.")]
     [InlineData("unauthorized: login required", "Run codex login, then refresh.")]

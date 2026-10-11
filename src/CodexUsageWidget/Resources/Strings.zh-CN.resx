@@ -223,4 +223,27 @@
   <data name="Taskbar_UsageUnavailable" xml:space="preserve"><value>Codex 用量当前不可用。</value></data>
   <data name="Taskbar_Remaining" xml:space="preserve"><value>{0}：剩余 {1}%</value></data>
   <data name="Taskbar_RemainingWithReset" xml:space="preserve"><value>{0}：剩余 {1}% · {2} 重置</value></data>
+  <data name="Settings_AlwaysOnTop" xml:space="preserve"><value>始终置顶</value></data>
+  <data name="Settings_AlwaysOnTopDescription" xml:space="preserve"><value>在其他窗口上方显示桌面小组件</value></data>
+  <data name="Settings_SaveError" xml:space="preserve"><value>无法保存设置。</value></data>
+  <data name="Settings_Language_Japanese" xml:space="preserve"><value>日本語</value></data>
+  <data name="Settings_Language_JapaneseDescription" xml:space="preserve"><value>始终使用日语</value></data>
+  <data name="Claude_Live" xml:space="preserve"><value>实时</value></data>
+  <data name="Claude_RefreshInterval" xml:space="preserve"><value>每3分钟自动刷新</value></data>
+  <data name="Claude_Updated" xml:space="preserve"><value>更新时间 {0} · 每3分钟</value></data>
+  <data name="Claude_LastKnown" xml:space="preserve"><value>上次成功更新 {0} · 显示之前的数据</value></data>
+  <data name="Claude_LoginRequired" xml:space="preserve"><value>请通过Claude Code的/login登录，然后刷新。</value></data>
+  <data name="Claude_RateLimited" xml:space="preserve"><value>请求过多，稍后自动重试。</value></data>
+  <data name="Claude_ServiceUnavailable" xml:space="preserve"><value>暂时无法获取Claude用量。</value></data>
+  <data name="Claude_NetworkError" xml:space="preserve"><value>无法连接Claude，请检查网络。</value></data>
+  <data name="Claude_InvalidResponse" xml:space="preserve"><value>Claude返回了不支持的用量格式。</value></data>
+  <data name="Claude_NoLimits" xml:space="preserve"><value>未返回Claude订阅额度。</value></data>
+  <data name="Claude_Timeout" xml:space="preserve"><value>Claude响应超时。</value></data>
+  <data name="Claude_TrayUnavailable" xml:space="preserve"><value>Claude：不可用</value></data>
+  <data name="Claude_Stale" xml:space="preserve"><value>之前的数据</value></data>
+  <data name="Claude_Preview" xml:space="preserve"><value>预览（示例数据）</value></data>
+  <data name="Settings_Providers" xml:space="preserve"><value>服务显示</value></data>
+  <data name="Settings_ShowCodex" xml:space="preserve"><value>显示Codex</value></data>
+  <data name="Settings_ShowClaude" xml:space="preserve"><value>显示Claude Code</value></data>
+  <data name="Settings_NoProviders" xml:space="preserve"><value>未选择服务，请在设置中启用显示。</value></data>
 </root>

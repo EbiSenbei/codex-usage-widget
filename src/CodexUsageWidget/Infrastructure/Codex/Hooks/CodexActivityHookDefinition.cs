@@ -9,7 +9,7 @@ internal static class CodexActivityHookDefinition
     private const int LegacyPowerShellTimeoutSeconds = 3;
     private const int LegacyDirectTimeoutSeconds = 1;
     private const string HookArgument = "--codex-activity-hook";
-    private const string WidgetExecutableName = "CodexUsageWidget.exe";
+    private const string WidgetExecutableName = "AgentUsageWidget.exe";
     private const string NestedPowerShellPrefix =
         "powershell.exe -NoLogo -NoProfile -NonInteractive " +
         "-ExecutionPolicy Bypass -Command \"& '";

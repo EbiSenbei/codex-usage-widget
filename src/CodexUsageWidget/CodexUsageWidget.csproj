@@ -6,15 +6,15 @@
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
-    <AssemblyName>CodexUsageWidget</AssemblyName>
+    <AssemblyName>AgentUsageWidget</AssemblyName>
     <RootNamespace>CodexUsageWidget</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Assets\CodexUsageWidget.ico</ApplicationIcon>
     <Version>1.7.1</Version>
     <Authors>Ognjen Marinković</Authors>
     <Company>ognjeeen</Company>
-    <Description>Local Windows widget for Codex subscription usage.</Description>
-    <RepositoryUrl>https://github.com/ognjeeen/codex-usage-widget</RepositoryUrl>
+    <Description>Windows widget for Codex and Claude Code subscription usage.</Description>
+    <RepositoryUrl>https://github.com/EbiSenbei/codex-usage-widget</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <DefineConstants Condition="'$(EnableActivityPreview)' == 'true'">$(DefineConstants);ACTIVITY_PREVIEW</DefineConstants>
     <DefineConstants Condition="'$(EnableUsagePreview)' == 'true'">$(DefineConstants);USAGE_PREVIEW</DefineConstants>
@@ -22,5 +22,6 @@
   <ItemGroup>
     <None Include="..\..\LICENSE" Link="LICENSE" CopyToPublishDirectory="PreserveNewest" />
     <None Include="..\..\README.md" Link="README.md" CopyToPublishDirectory="PreserveNewest" />
+    <None Include="..\..\README.ja.md" Link="README.ja.md" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

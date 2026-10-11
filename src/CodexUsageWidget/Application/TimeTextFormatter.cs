@@ -59,7 +59,7 @@ public static class TimeTextFormatter
     {
         var effectiveCulture = culture ?? CultureInfo.CurrentCulture;
         var timePattern = includeSeconds ? "h:mm:ss" : "h:mm";
-        var format = effectiveCulture.TwoLetterISOLanguageName == "zh"
+        var format = effectiveCulture.TwoLetterISOLanguageName is "zh" or "ja"
             ? $"tt {timePattern}"
             : $"{timePattern} tt";
         return value.ToString(format, effectiveCulture);

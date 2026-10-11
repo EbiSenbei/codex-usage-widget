@@ -4,6 +4,7 @@ obj/
 *.user
 *.suo
 artifacts/
+/release/
 TestResults/
 .idea/
 *.zip

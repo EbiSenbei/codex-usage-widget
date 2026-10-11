@@ -1,6 +1,7 @@
 using System.Windows;
 using CodexUsageWidget.Application;
 using CodexUsageWidget.Infrastructure;
+using CodexUsageWidget.Infrastructure.Claude;
 using CodexUsageWidget.Infrastructure.Codex;
 using CodexUsageWidget.Infrastructure.Codex.Hooks;
 using CodexUsageWidget.Infrastructure.Logging;
@@ -14,7 +15,7 @@ namespace CodexUsageWidget;
 
 public partial class App : System.Windows.Application, IDisposable
 {
-    private const string SingleInstanceMutexName = @"Local\CodexUsageWidget.SingleInstance";
+    private const string SingleInstanceMutexName = @"Local\AgentUsageWidget.SingleInstance";
     private SingleInstanceGuard? _singleInstanceGuard;
     private FileLogger? _logger;
     private GlobalExceptionHandler? _exceptionHandler;
@@ -69,6 +70,16 @@ public partial class App : System.Windows.Application, IDisposable
             }
 #endif
             var usageMonitor = new UsageMonitor(usageProvider);
+            IUsageProvider claudeProvider = new ClaudeUsageProvider();
+            if (usagePreviewEnabled)
+            {
+                claudeProvider = new PreviewClaudeUsageProvider(claudeProvider);
+            }
+
+            var claudeMonitor = new UsageMonitor(claudeProvider,
+                refreshInterval: TimeSpan.FromMinutes(3),
+                errorFormatter: static key => key,
+                timeoutMessage: static () => "Claude_Timeout");
             usageMonitor.DiagnosticMessage += (_, message) => _logger.Info(message);
             var resetUseCase = new RateLimitResetUseCase(resetConsumer, usageMonitor);
 
@@ -109,8 +120,17 @@ public partial class App : System.Windows.Application, IDisposable
                 new TrayIconService(),
                 _themeController,
                 _languageController,
-                new TimeFormatPreferenceStore());
+                new TimeFormatPreferenceStore(),
+                claudeMonitor,
+                new AlwaysOnTopPreferenceStore(),
+                new ProviderVisibilityStore());
             MainWindow = window;
+            // Expose the sample window to desktop UI inspection without changing normal tray behavior.
+            if (usagePreviewEnabled)
+            {
+                window.ShowInTaskbar = true;
+            }
+
             activityMonitor.StartAsync().GetAwaiter().GetResult();
             window.Show();
             if (window.StartsInTaskbarIndicatorMode)
@@ -118,7 +138,7 @@ public partial class App : System.Windows.Application, IDisposable
                 window.Hide();
             }
 
-            _logger.Info("Codex Usage Widget started.");
+            _logger.Info("Agent Usage Widget started.");
         }
         catch (Exception ex)
         {
@@ -135,7 +155,7 @@ public partial class App : System.Windows.Application, IDisposable
 
     protected override void OnExit(ExitEventArgs e)
     {
-        _logger?.Info("Codex Usage Widget stopped.");
+        _logger?.Info("Agent Usage Widget stopped.");
         Dispose();
         base.OnExit(e);
     }

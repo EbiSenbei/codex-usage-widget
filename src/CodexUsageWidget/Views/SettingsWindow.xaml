@@ -284,6 +284,32 @@
                                        Style="{StaticResource SupportingText}" />
                         </StackPanel>
                     </CheckBox>
+                    <CheckBox x:Name="AlwaysOnTopOption" Margin="0,8,0,0"
+                              AutomationProperties.Name="{localization:Loc Settings_AlwaysOnTop}"
+                              Checked="AlwaysOnTopOption_OnChanged" Unchecked="AlwaysOnTopOption_OnChanged"
+                              Style="{StaticResource SettingsToggleCard}">
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="{localization:Loc Settings_AlwaysOnTop}" FontWeight="SemiBold" />
+                            <TextBlock Text="{localization:Loc Settings_AlwaysOnTopDescription}"
+                                       Margin="0,3,0,0" Style="{StaticResource SupportingText}" />
+                        </StackPanel>
+                    </CheckBox>
+                </StackPanel>
+
+                <StackPanel Margin="0,18,0,0">
+                    <TextBlock Text="{localization:Loc Settings_Providers}" Style="{StaticResource SectionTitle}" />
+                    <CheckBox x:Name="CodexVisibilityOption" Margin="0,14,0,0"
+                              AutomationProperties.Name="{localization:Loc Settings_ShowCodex}"
+                              Checked="ProviderVisibilityOption_OnChanged" Unchecked="ProviderVisibilityOption_OnChanged"
+                              Style="{StaticResource SettingsToggleCard}">
+                        <TextBlock Text="{localization:Loc Settings_ShowCodex}" FontWeight="SemiBold" />
+                    </CheckBox>
+                    <CheckBox x:Name="ClaudeVisibilityOption" Margin="0,8,0,0"
+                              AutomationProperties.Name="{localization:Loc Settings_ShowClaude}"
+                              Checked="ProviderVisibilityOption_OnChanged" Unchecked="ProviderVisibilityOption_OnChanged"
+                              Style="{StaticResource SettingsToggleCard}">
+                        <TextBlock Text="{localization:Loc Settings_ShowClaude}" FontWeight="SemiBold" />
+                    </CheckBox>
                 </StackPanel>
 
                 <StackPanel Margin="0,18,0,14">
@@ -320,6 +346,15 @@
                             <TextBlock Text="{localization:Loc Settings_Language_EnglishDescription}"
                                        Margin="0,3,0,0"
                                        Style="{StaticResource SupportingText}" />
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton x:Name="JapaneseLanguageOption" GroupName="Language"
+                                 AutomationProperties.Name="{localization:Loc Settings_Language_Japanese}"
+                                 Checked="LanguageOption_OnChecked" Style="{StaticResource SettingsOptionCard}">
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="{localization:Loc Settings_Language_Japanese}" FontWeight="SemiBold" />
+                            <TextBlock Text="{localization:Loc Settings_Language_JapaneseDescription}"
+                                       Margin="0,3,0,0" Style="{StaticResource SupportingText}" />
                         </StackPanel>
                     </RadioButton>
                     <RadioButton x:Name="SimplifiedChineseLanguageOption"

@@ -1,0 +1,733 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms</value>
+  </resheader>
+  <data name="App_Name" xml:space="preserve">
+    <value>Agent Usage Widget</value>
+  </data>
+  <data name="App_MainTitle" xml:space="preserve">
+    <value>Codex・Claude Code 使用状況</value>
+  </data>
+  <data name="App_InstallFailure" xml:space="preserve">
+    <value>アプリをインストールできませんでした。{0}</value>
+  </data>
+  <data name="App_StartupFailure" xml:space="preserve">
+    <value>アプリを起動できませんでした。ログを確認してください：{0}</value>
+  </data>
+  <data name="Common_Available" xml:space="preserve">
+    <value>利用可能</value>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="Common_CheckAgain" xml:space="preserve">
+    <value>再確認</value>
+  </data>
+  <data name="Common_Close" xml:space="preserve">
+    <value>閉じる</value>
+  </data>
+  <data name="Common_Exit" xml:space="preserve">
+    <value>終了</value>
+  </data>
+  <data name="Common_NoneAvailable" xml:space="preserve">
+    <value>利用可能なものはありません</value>
+  </data>
+  <data name="Common_Refresh" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="Common_Settings" xml:space="preserve">
+    <value>設定</value>
+  </data>
+  <data name="Common_Unlimited" xml:space="preserve">
+    <value>無制限</value>
+  </data>
+  <data name="Main_ActivityRunning" xml:space="preserve">
+    <value>Codexのタスクを実行中</value>
+  </data>
+  <data name="Main_RefreshUsage" xml:space="preserve">
+    <value>使用状況を更新</value>
+  </data>
+  <data name="Main_ShowCompact" xml:space="preserve">
+    <value>コンパクト表示</value>
+  </data>
+  <data name="Main_ShowDetails" xml:space="preserve">
+    <value>詳細表示</value>
+  </data>
+  <data name="Main_ToggleLayout" xml:space="preserve">
+    <value>表示形式を切り替え</value>
+  </data>
+  <data name="Main_UseTaskbarLabel" xml:space="preserve">
+    <value>タスクバーに移動</value>
+  </data>
+  <data name="Main_StartupPreferenceError" xml:space="preserve">
+    <value>Windowsの自動起動設定を変更できませんでした。</value>
+  </data>
+  <data name="Main_UpdateOpenError" xml:space="preserve">
+    <value>リリースページを開けませんでした。</value>
+  </data>
+  <data name="Status_Connecting" xml:space="preserve">
+    <value>接続中…</value>
+  </data>
+  <data name="Status_WaitingForCodex" xml:space="preserve">
+    <value>Codexの応答を待っています</value>
+  </data>
+  <data name="Status_LocalWaiting" xml:space="preserve">
+    <value>更新待ち</value>
+  </data>
+  <data name="Status_Offline" xml:space="preserve">
+    <value>接続できません</value>
+  </data>
+  <data name="Status_LocalRetry" xml:space="preserve">
+    <value>更新ボタンで再試行</value>
+  </data>
+  <data name="Status_Syncing" xml:space="preserve">
+    <value>更新中…</value>
+  </data>
+  <data name="Status_LivePlan" xml:space="preserve">
+    <value>接続済み · {0}</value>
+  </data>
+  <data name="Status_HeadlineRemaining" xml:space="preserve">
+    <value>{0}の残量</value>
+  </data>
+  <data name="Status_LocalUpdated" xml:space="preserve">
+    <value>Codex 更新 {0}</value>
+  </data>
+  <data name="Status_NoLimits" xml:space="preserve">
+    <value>利用枠を取得できません。codex loginでログインしてください。</value>
+  </data>
+  <data name="Error_CliNotFound" xml:space="preserve">
+    <value>Codex CLIが見つかりません。</value>
+  </data>
+  <data name="Error_LoginRequired" xml:space="preserve">
+    <value>codex loginでログインしてから更新してください。</value>
+  </data>
+  <data name="Error_ResponseTimeout" xml:space="preserve">
+    <value>Codexの応答がタイムアウトしました。</value>
+  </data>
+  <data name="Error_Unexpected" xml:space="preserve">
+    <value>Codexの使用状況を取得できませんでした。{0}</value>
+  </data>
+  <data name="Warning_WorkspaceCreditsDepleted" xml:space="preserve">
+    <value>ワークスペースのクレジットを使い切りました。</value>
+  </data>
+  <data name="Warning_WorkspaceUsageLimitReached" xml:space="preserve">
+    <value>ワークスペースの利用上限に達しました。</value>
+  </data>
+  <data name="Warning_UsageLimitReached" xml:space="preserve">
+    <value>Codexの利用上限に達しました。</value>
+  </data>
+  <data name="Warning_SpendControlReached" xml:space="preserve">
+    <value>個人の支出上限に達しました。</value>
+  </data>
+  <data name="Usage_FiveHourLimit" xml:space="preserve">
+    <value>5時間枠</value>
+  </data>
+  <data name="Usage_WeeklyLimit" xml:space="preserve">
+    <value>週間枠</value>
+  </data>
+  <data name="Usage_DayLimit" xml:space="preserve">
+    <value>{0}日間枠</value>
+  </data>
+  <data name="Usage_HourLimit" xml:space="preserve">
+    <value>{0}時間枠</value>
+  </data>
+  <data name="Usage_MinuteLimit" xml:space="preserve">
+    <value>{0}分間枠</value>
+  </data>
+  <data name="Usage_PrimaryLimit" xml:space="preserve">
+    <value>第1利用枠</value>
+  </data>
+  <data name="Usage_SecondaryLimit" xml:space="preserve">
+    <value>第2利用枠</value>
+  </data>
+  <data name="Usage_UsedPercent" xml:space="preserve">
+    <value>{0}% 使用済み</value>
+  </data>
+  <data name="Usage_RemainingPercent" xml:space="preserve">
+    <value>残り {0}%</value>
+  </data>
+  <data name="Usage_ResetUnavailable" xml:space="preserve">
+    <value>リセット時刻は不明</value>
+  </data>
+  <data name="Usage_ResetsNow" xml:space="preserve">
+    <value>リセット時刻に到達</value>
+  </data>
+  <data name="Usage_ResetsInHours" xml:space="preserve">
+    <value>あと{0}時間でリセット · {1}</value>
+  </data>
+  <data name="Usage_ResetsAt" xml:space="preserve">
+    <value>リセット {0}</value>
+  </data>
+  <data name="Usage_CreditsRemaining" xml:space="preserve">
+    <value>残り {0}</value>
+  </data>
+  <data name="Usage_ChatGptCredits" xml:space="preserve">
+    <value>ChatGPTクレジット</value>
+  </data>
+  <data name="Usage_IndividualSpendLimit" xml:space="preserve">
+    <value>個人の支出上限</value>
+  </data>
+  <data name="Usage_SpendLimitValue" xml:space="preserve">
+    <value>{1}のうち{0}使用 · 残り{2}%</value>
+  </data>
+  <data name="Usage_SpendLimitResets" xml:space="preserve">
+    <value>支出枠リセット</value>
+  </data>
+  <data name="Usage_RateLimitResets" xml:space="preserve">
+    <value>利用枠のリセット権</value>
+  </data>
+  <data name="Usage_CountAvailable" xml:space="preserve">
+    <value>{0}回利用可能</value>
+  </data>
+  <data name="Usage_ResetNextExpires" xml:space="preserve">
+    <value>次の期限：{0:MMM d} {1}</value>
+  </data>
+  <data name="Usage_ResetExpires" xml:space="preserve">
+    <value>期限：{0:MMM d} {1}</value>
+  </data>
+  <data name="Usage_ResetExpirationUnavailable" xml:space="preserve">
+    <value>有効期限は不明</value>
+  </data>
+  <data name="Usage_UseReset" xml:space="preserve">
+    <value>リセット権を使う</value>
+  </data>
+  <data name="Usage_UseNextReset" xml:space="preserve">
+    <value>次のリセット権を使う</value>
+  </data>
+  <data name="Usage_ResetExpandTooltip" xml:space="preserve">
+    <value>利用可能なリセット権を表示</value>
+  </data>
+  <data name="Usage_ResetCollapseTooltip" xml:space="preserve">
+    <value>リセット権を折りたたむ</value>
+  </data>
+  <data name="Usage_ResetConfirmTitle" xml:space="preserve">
+    <value>このリセット権を使いますか？</value>
+  </data>
+  <data name="Usage_ResetConfirmKnown" xml:space="preserve">
+    <value>有効期限は{0:MMM d} {1}です。対象のCodex利用枠に適用され、取り消せません。</value>
+  </data>
+  <data name="Usage_ResetConfirmUnknownExpiration" xml:space="preserve">
+    <value>対象のCodex利用枠に適用され、取り消せません。</value>
+  </data>
+  <data name="Usage_ResetConfirmNext" xml:space="preserve">
+    <value>Codexが次のリセット権を選びます。対象の利用枠に適用され、取り消せません。</value>
+  </data>
+  <data name="Usage_ResetNothingToReset" xml:space="preserve">
+    <value>現在リセットできるCodex利用枠はありません。リセット権は使われませんでした。</value>
+  </data>
+  <data name="Usage_ResetNoCredit" xml:space="preserve">
+    <value>このリセット権は利用できなくなりました。</value>
+  </data>
+  <data name="Usage_ResetFailure" xml:space="preserve">
+    <value>リセット権を使えませんでした。{0}</value>
+  </data>
+  <data name="Usage_SectionOverview" xml:space="preserve">
+    <value>概要</value>
+  </data>
+  <data name="Usage_SectionCreditsLimits" xml:space="preserve">
+    <value>クレジット・利用枠</value>
+  </data>
+  <data name="Usage_SectionTokenActivity" xml:space="preserve">
+    <value>トークン使用状況</value>
+  </data>
+  <data name="Usage_NotQuotaConsumption" xml:space="preserve">
+    <value>利用枠の消費率とは異なります</value>
+  </data>
+  <data name="Usage_SectionModelLimits" xml:space="preserve">
+    <value>モデル別の利用枠</value>
+  </data>
+  <data name="Token_Lifetime" xml:space="preserve">
+    <value>累計トークン</value>
+  </data>
+  <data name="Token_PeakDaily" xml:space="preserve">
+    <value>1日の最多トークン</value>
+  </data>
+  <data name="Token_LongestTurn" xml:space="preserve">
+    <value>最長の実行時間</value>
+  </data>
+  <data name="Token_CurrentStreak" xml:space="preserve">
+    <value>現在の連続利用日数</value>
+  </data>
+  <data name="Token_LongestStreak" xml:space="preserve">
+    <value>最長の連続利用日数</value>
+  </data>
+  <data name="Token_Days" xml:space="preserve">
+    <value>{0}日</value>
+  </data>
+  <data name="Token_Count" xml:space="preserve">
+    <value>{0}トークン</value>
+  </data>
+  <data name="Token_ChartPeak" xml:space="preserve">
+    <value>グラフの最大値の{0}%</value>
+  </data>
+  <data name="Token_DurationHoursMinutes" xml:space="preserve">
+    <value>{0}時間{1}分</value>
+  </data>
+  <data name="Token_DurationMinutes" xml:space="preserve">
+    <value>{0}分</value>
+  </data>
+  <data name="Settings_Description" xml:space="preserve">
+    <value>アプリの表示と動作を設定します。</value>
+  </data>
+  <data name="Settings_SectionGeneral" xml:space="preserve">
+    <value>一般</value>
+  </data>
+  <data name="Settings_StartWithWindows" xml:space="preserve">
+    <value>Windows起動時に実行</value>
+  </data>
+  <data name="Settings_StartWithWindowsDescription" xml:space="preserve">
+    <value>Windowsへのログイン時に自動起動</value>
+  </data>
+  <data name="Settings_Theme_Title" xml:space="preserve">
+    <value>テーマ</value>
+  </data>
+  <data name="Settings_Theme_Description" xml:space="preserve">
+    <value>Windowsの設定に合わせるか、テーマを選択します。</value>
+  </data>
+  <data name="Settings_Theme_System" xml:space="preserve">
+    <value>Windowsの設定に合わせる</value>
+  </data>
+  <data name="Settings_Theme_SystemDescription" xml:space="preserve">
+    <value>Windowsのアプリテーマと連動</value>
+  </data>
+  <data name="Settings_Theme_SystemAutomation" xml:space="preserve">
+    <value>Windowsのテーマを使用</value>
+  </data>
+  <data name="Settings_Theme_Light" xml:space="preserve">
+    <value>ライト</value>
+  </data>
+  <data name="Settings_Theme_LightDescription" xml:space="preserve">
+    <value>明るい背景と暗い文字</value>
+  </data>
+  <data name="Settings_Theme_LightAutomation" xml:space="preserve">
+    <value>ライトテーマを使用</value>
+  </data>
+  <data name="Settings_Theme_Dark" xml:space="preserve">
+    <value>ダーク</value>
+  </data>
+  <data name="Settings_Theme_DarkDescription" xml:space="preserve">
+    <value>暗い背景と明るい文字</value>
+  </data>
+  <data name="Settings_Theme_DarkAutomation" xml:space="preserve">
+    <value>ダークテーマを使用</value>
+  </data>
+  <data name="Settings_Accent_Title" xml:space="preserve">
+    <value>アクセントカラー</value>
+  </data>
+  <data name="Settings_Accent_Blue" xml:space="preserve">
+    <value>青</value>
+  </data>
+  <data name="Settings_Accent_Violet" xml:space="preserve">
+    <value>紫</value>
+  </data>
+  <data name="Settings_Accent_Teal" xml:space="preserve">
+    <value>青緑</value>
+  </data>
+  <data name="Settings_Accent_Emerald" xml:space="preserve">
+    <value>緑</value>
+  </data>
+  <data name="Settings_Accent_Pink" xml:space="preserve">
+    <value>ピンク</value>
+  </data>
+  <data name="Settings_Accent_Automation" xml:space="preserve">
+    <value>アクセントカラーを{0}に変更</value>
+  </data>
+  <data name="Settings_Accent_BlueAutomation" xml:space="preserve">
+    <value>青のアクセントを使用</value>
+  </data>
+  <data name="Settings_Accent_VioletAutomation" xml:space="preserve">
+    <value>紫のアクセントを使用</value>
+  </data>
+  <data name="Settings_Accent_TealAutomation" xml:space="preserve">
+    <value>青緑のアクセントを使用</value>
+  </data>
+  <data name="Settings_Accent_EmeraldAutomation" xml:space="preserve">
+    <value>緑のアクセントを使用</value>
+  </data>
+  <data name="Settings_Accent_PinkAutomation" xml:space="preserve">
+    <value>ピンクのアクセントを使用</value>
+  </data>
+  <data name="Settings_Layout_Title" xml:space="preserve">
+    <value>表示形式</value>
+  </data>
+  <data name="Settings_Layout_Description" xml:space="preserve">
+    <value>ウィジェットに表示する情報量を選びます。</value>
+  </data>
+  <data name="Settings_Layout_Compact" xml:space="preserve">
+    <value>コンパクト</value>
+  </data>
+  <data name="Settings_Layout_CompactDescription" xml:space="preserve">
+    <value>利用枠を簡潔に表示</value>
+  </data>
+  <data name="Settings_Layout_CompactAutomation" xml:space="preserve">
+    <value>コンパクト表示を使用</value>
+  </data>
+  <data name="Settings_Layout_Detailed" xml:space="preserve">
+    <value>詳細</value>
+  </data>
+  <data name="Settings_Layout_DetailedDescription" xml:space="preserve">
+    <value>使用状況の詳細を表示</value>
+  </data>
+  <data name="Settings_Layout_DetailedAutomation" xml:space="preserve">
+    <value>詳細表示を使用</value>
+  </data>
+  <data name="Settings_SectionUsage" xml:space="preserve">
+    <value>Codexの表示</value>
+  </data>
+  <data name="Settings_DisplayedLimit_Title" xml:space="preserve">
+    <value>大きく表示する利用枠</value>
+  </data>
+  <data name="Settings_DisplayedLimit_Description" xml:space="preserve">
+    <value>見出し・タスクバー・トレイに表示するCodex利用枠。</value>
+  </data>
+  <data name="Settings_DisplayedLimit_FiveHourDescription" xml:space="preserve">
+    <value>5時間の利用枠を表示</value>
+  </data>
+  <data name="Settings_DisplayedLimit_FiveHourAutomation" xml:space="preserve">
+    <value>5時間枠を表示</value>
+  </data>
+  <data name="Settings_DisplayedLimit_FiveHourUnavailable" xml:space="preserve">
+    <value>このアカウントではCodexの5時間枠を取得できません。</value>
+  </data>
+  <data name="Settings_DisplayedLimit_WeeklyDescription" xml:space="preserve">
+    <value>週間の利用枠を表示</value>
+  </data>
+  <data name="Settings_DisplayedLimit_WeeklyAutomation" xml:space="preserve">
+    <value>週間枠を表示</value>
+  </data>
+  <data name="Settings_DisplayedLimit_MostConstrained" xml:space="preserve">
+    <value>残量が最も少ない枠</value>
+  </data>
+  <data name="Settings_DisplayedLimit_MostConstrainedDescription" xml:space="preserve">
+    <value>利用可能な枠のうち残量が最も少ないもの</value>
+  </data>
+  <data name="Settings_DisplayedLimit_MostConstrainedAutomation" xml:space="preserve">
+    <value>残量が最も少ない枠を表示</value>
+  </data>
+  <data name="Settings_SectionFeatures" xml:space="preserve">
+    <value>機能</value>
+  </data>
+  <data name="Settings_Language_Title" xml:space="preserve">
+    <value>言語</value>
+  </data>
+  <data name="Settings_Language_Description" xml:space="preserve">
+    <value>日本語・英語・簡体字中国語を選択できます。</value>
+  </data>
+  <data name="Settings_Language_System" xml:space="preserve">
+    <value>Windowsの設定に合わせる</value>
+  </data>
+  <data name="Settings_Language_SystemDescription" xml:space="preserve">
+    <value>Windowsの言語を使用（未対応言語は英語）</value>
+  </data>
+  <data name="Settings_Language_SystemAutomation" xml:space="preserve">
+    <value>Windowsの言語を使用</value>
+  </data>
+  <data name="Settings_Language_English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Settings_Language_EnglishDescription" xml:space="preserve">
+    <value>常に英語で表示</value>
+  </data>
+  <data name="Settings_Language_EnglishAutomation" xml:space="preserve">
+    <value>英語を使用</value>
+  </data>
+  <data name="Settings_Language_Chinese" xml:space="preserve">
+    <value>简体中文</value>
+  </data>
+  <data name="Settings_Language_ChineseDescription" xml:space="preserve">
+    <value>常に簡体字中国語で表示</value>
+  </data>
+  <data name="Settings_Language_ChineseAutomation" xml:space="preserve">
+    <value>簡体字中国語を使用</value>
+  </data>
+  <data name="Settings_TimeFormat_Title" xml:space="preserve">
+    <value>時刻の表示形式</value>
+  </data>
+  <data name="Settings_TimeFormat_Description" xml:space="preserve">
+    <value>アプリ内の時刻の表示形式を選びます。</value>
+  </data>
+  <data name="Settings_TimeFormat_Automatic" xml:space="preserve">
+    <value>Windowsの設定に合わせる</value>
+  </data>
+  <data name="Settings_TimeFormat_AutomaticDescription" xml:space="preserve">
+    <value>Windowsの地域設定を使用</value>
+  </data>
+  <data name="Settings_TimeFormat_AutomaticAutomation" xml:space="preserve">
+    <value>Windowsの時刻形式を使用</value>
+  </data>
+  <data name="Settings_TimeFormat_TwentyFourHour" xml:space="preserve">
+    <value>24時間制</value>
+  </data>
+  <data name="Settings_TimeFormat_TwentyFourHourDescription" xml:space="preserve">
+    <value>14:05のように表示</value>
+  </data>
+  <data name="Settings_TimeFormat_TwentyFourHourAutomation" xml:space="preserve">
+    <value>24時間制を使用</value>
+  </data>
+  <data name="Settings_TimeFormat_TwelveHour" xml:space="preserve">
+    <value>12時間制</value>
+  </data>
+  <data name="Settings_TimeFormat_TwelveHourDescription" xml:space="preserve">
+    <value>午後2:05のように表示</value>
+  </data>
+  <data name="Settings_TimeFormat_TwelveHourAutomation" xml:space="preserve">
+    <value>12時間制を使用</value>
+  </data>
+  <data name="Activity_Title" xml:space="preserve">
+    <value>Codexの動作表示</value>
+  </data>
+  <data name="Activity_Description" xml:space="preserve">
+    <value>ローカルのCodexタスク実行中に点を表示</value>
+  </data>
+  <data name="Activity_Privacy" xml:space="preserve">
+    <value>動作の種類・セッションID・ターンIDのみをローカルで送受信します。プロンプトや回答は読み取りません。</value>
+  </data>
+  <data name="Activity_RemoveHooks" xml:space="preserve">
+    <value>フックを削除</value>
+  </data>
+  <data name="Activity_CopyHooksTooltip" xml:space="preserve">
+    <value>/hooksをコピーしてCodexを開く</value>
+  </data>
+  <data name="Activity_Checking" xml:space="preserve">
+    <value>Codexを確認中…</value>
+  </data>
+  <data name="Activity_CheckingDescription" xml:space="preserve">
+    <value>フックの設定と信頼状態を確認しています。</value>
+  </data>
+  <data name="Activity_OpenInCodex" xml:space="preserve">
+    <value>Codexで開く</value>
+  </data>
+  <data name="Activity_ReviewHooks" xml:space="preserve">
+    <value>フックを確認</value>
+  </data>
+  <data name="Activity_SetupRequired" xml:space="preserve">
+    <value>設定が必要</value>
+  </data>
+  <data name="Activity_SetupRequiredDescription" xml:space="preserve">
+    <value>動作表示用のフックを3つ追加します。書き込む前にhooks.jsonの変更内容を確認できます。</value>
+  </data>
+  <data name="Activity_UpdateAvailable" xml:space="preserve">
+    <value>更新できます</value>
+  </data>
+  <data name="Activity_UpdateDescription" xml:space="preserve">
+    <value>旧バージョンの動作表示用フックがあります。変更内容を確認して更新してください。</value>
+  </data>
+  <data name="Activity_ReviewUpdate" xml:space="preserve">
+    <value>更新内容を確認</value>
+  </data>
+  <data name="Activity_OneStepLeft" xml:space="preserve">
+    <value>あと1ステップ</value>
+  </data>
+  <data name="Activity_ApprovalDescription" xml:space="preserve">
+    <value>フックを追加しました。Codexで定義を承認すると利用できます。</value>
+  </data>
+  <data name="Activity_ApproveInCodex" xml:space="preserve">
+    <value>Codexで承認</value>
+  </data>
+  <data name="Activity_Ready" xml:space="preserve">
+    <value>動作表示の準備完了</value>
+  </data>
+  <data name="Activity_ReadyDescription" xml:space="preserve">
+    <value>3つのフックがインストール・承認済みです。</value>
+  </data>
+  <data name="Activity_ReviewRequired" xml:space="preserve">
+    <value>再確認が必要</value>
+  </data>
+  <data name="Activity_ModifiedDescription" xml:space="preserve">
+    <value>変更された定義をCodexが停止しました。再確認してください。</value>
+  </data>
+  <data name="Activity_ReviewInCodex" xml:space="preserve">
+    <value>Codexで確認</value>
+  </data>
+  <data name="Activity_HooksDisabled" xml:space="preserve">
+    <value>Codexのフックは無効です</value>
+  </data>
+  <data name="Activity_HooksDisabledDescription" xml:space="preserve">
+    <value>Codex設定の[features]でhooks = trueにしてください。</value>
+  </data>
+  <data name="Activity_StatusUnavailable" xml:space="preserve">
+    <value>追加済み · 状態不明</value>
+  </data>
+  <data name="Activity_StatusUnavailableDescription" xml:space="preserve">
+    <value>フックは追加済みですが、信頼状態を確認できません。</value>
+  </data>
+  <data name="Activity_StatusUnavailableWithDetail" xml:space="preserve">
+    <value>フックは追加済みですが、信頼状態を取得できません。{0}</value>
+  </data>
+  <data name="Activity_OpenHooksInCodex" xml:space="preserve">
+    <value>Codexでフックを開く</value>
+  </data>
+  <data name="Activity_SetupUnavailable" xml:space="preserve">
+    <value>設定できません</value>
+  </data>
+  <data name="Activity_SetupUnavailableDescription" xml:space="preserve">
+    <value>動作表示用フックの設定を読み取れません。</value>
+  </data>
+  <data name="Activity_SetupErrorDetail" xml:space="preserve">
+    <value>動作表示用フックを設定できませんでした。{0}</value>
+  </data>
+  <data name="Activity_StatusTimeout" xml:space="preserve">
+    <value>Codexの確認がタイムアウトしました。CLIを確認して再試行してください。</value>
+  </data>
+  <data name="Activity_CodexOpenCopied" xml:space="preserve">
+    <value>Codexを開きました。/hooksを貼り付けて3つの定義を承認してください。</value>
+  </data>
+  <data name="Activity_CodexOpenType" xml:space="preserve">
+    <value>Codexを開きました。/hooksを入力して3つの定義を承認してください。</value>
+  </data>
+  <data name="Activity_ReviewTitle" xml:space="preserve">
+    <value>Codexの動作表示用フックを確認</value>
+  </data>
+  <data name="Activity_ReviewInstallHeading" xml:space="preserve">
+    <value>フックの追加内容を確認</value>
+  </data>
+  <data name="Activity_ReviewRemoveHeading" xml:space="preserve">
+    <value>フックの削除内容を確認</value>
+  </data>
+  <data name="Activity_ReviewInstallDescription" xml:space="preserve">
+    <value>この内容を~/.codex/hooks.jsonに書き込みます。既存のフックとその他の設定は保持します。</value>
+  </data>
+  <data name="Activity_ReviewRemoveDescription" xml:space="preserve">
+    <value>このアプリに一致するハンドラーのみ削除します。その他のフックは保持します。</value>
+  </data>
+  <data name="Activity_InstallHooks" xml:space="preserve">
+    <value>フックを追加</value>
+  </data>
+  <data name="Activity_CommandAlreadyInstalled" xml:space="preserve">
+    <value>動作表示用フックは追加済みです。</value>
+  </data>
+  <data name="Activity_CommandNoMatching" xml:space="preserve">
+    <value>一致するフックはありません。</value>
+  </data>
+  <data name="Activity_CommandProposed" xml:space="preserve">
+    <value>~/.codex/hooks.jsonの変更内容：</value>
+  </data>
+  <data name="Activity_CommandApplyPrompt" xml:space="preserve">
+    <value>この変更を適用しますか？ [y/N] </value>
+  </data>
+  <data name="Activity_CommandNoChanges" xml:space="preserve">
+    <value>変更しませんでした。</value>
+  </data>
+  <data name="Activity_CommandInstalled" xml:space="preserve">
+    <value>フックを追加しました。/hooksで定義を確認・承認してください。</value>
+  </data>
+  <data name="Activity_CommandRemoved" xml:space="preserve">
+    <value>一致するフックを削除しました。</value>
+  </data>
+  <data name="Activity_CommandFailure" xml:space="preserve">
+    <value>フックの設定に失敗しました：{0}</value>
+  </data>
+  <data name="Tray_Open" xml:space="preserve">
+    <value>開く</value>
+  </data>
+  <data name="Tray_Settings" xml:space="preserve">
+    <value>設定…</value>
+  </data>
+  <data name="Tray_DisplayMode" xml:space="preserve">
+    <value>表示モード</value>
+  </data>
+  <data name="Tray_DesktopWidget" xml:space="preserve">
+    <value>デスクトップウィジェット</value>
+  </data>
+  <data name="Tray_TaskbarLabel" xml:space="preserve">
+    <value>タスクバー表示</value>
+  </data>
+  <data name="Tray_CheckUpdates" xml:space="preserve">
+    <value>更新を確認…</value>
+  </data>
+  <data name="Tray_Unavailable" xml:space="preserve">
+    <value>Codex · 取得できません</value>
+  </data>
+  <data name="Tray_Remaining" xml:space="preserve">
+    <value>Codex · 残り{0}%</value>
+  </data>
+  <data name="Taskbar_OpenWidget" xml:space="preserve">
+    <value>ウィジェットを開く</value>
+  </data>
+  <data name="Taskbar_PreviewActivity" xml:space="preserve">
+    <value>動作表示をプレビュー</value>
+  </data>
+  <data name="Taskbar_UseDesktopWidget" xml:space="preserve">
+    <value>デスクトップに表示</value>
+  </data>
+  <data name="Taskbar_UsageUnavailable" xml:space="preserve">
+    <value>Codexの使用状況を取得できません。</value>
+  </data>
+  <data name="Taskbar_Remaining" xml:space="preserve">
+    <value>{0}：残り{1}%</value>
+  </data>
+  <data name="Taskbar_RemainingWithReset" xml:space="preserve">
+    <value>{0}：残り{1}% · リセット{2}</value>
+  </data>
+  <data name="Settings_AlwaysOnTop" xml:space="preserve">
+    <value>常に最前面に表示</value>
+  </data>
+  <data name="Settings_AlwaysOnTopDescription" xml:space="preserve">
+    <value>ウィジェットを他のウィンドウより前に表示</value>
+  </data>
+  <data name="Settings_SaveError" xml:space="preserve">
+    <value>設定を保存できませんでした。</value>
+  </data>
+  <data name="Settings_Language_Japanese" xml:space="preserve">
+    <value>日本語</value>
+  </data>
+  <data name="Settings_Language_JapaneseDescription" xml:space="preserve">
+    <value>常に日本語で表示</value>
+  </data>
+  <data name="Claude_Live" xml:space="preserve">
+    <value>接続済み</value>
+  </data>
+  <data name="Claude_RefreshInterval" xml:space="preserve">
+    <value>3分ごとに自動更新</value>
+  </data>
+  <data name="Claude_Updated" xml:space="preserve">
+    <value>更新 {0} · 3分ごと</value>
+  </data>
+  <data name="Claude_LastKnown" xml:space="preserve">
+    <value>前回取得 {0} · 前回の値を表示</value>
+  </data>
+  <data name="Claude_LoginRequired" xml:space="preserve">
+    <value>Claude Codeの/loginでログインしてから更新してください。</value>
+  </data>
+  <data name="Claude_RateLimited" xml:space="preserve">
+    <value>リクエスト制限中です。時間を置いて再試行します。</value>
+  </data>
+  <data name="Claude_ServiceUnavailable" xml:space="preserve">
+    <value>Claudeの使用状況を一時的に取得できません。</value>
+  </data>
+  <data name="Claude_NetworkError" xml:space="preserve">
+    <value>Claudeに接続できません。接続を確認してください。</value>
+  </data>
+  <data name="Claude_InvalidResponse" xml:space="preserve">
+    <value>Claudeの使用状況の形式に対応できません。</value>
+  </data>
+  <data name="Claude_NoLimits" xml:space="preserve">
+    <value>Claudeのサブスクリプション利用枠を取得できません。</value>
+  </data>
+  <data name="Claude_Timeout" xml:space="preserve">
+    <value>Claudeの応答がタイムアウトしました。</value>
+  </data>
+  <data name="Claude_TrayUnavailable" xml:space="preserve">
+    <value>Claude：取得できません</value>
+  </data>
+  <data name="Claude_Stale" xml:space="preserve">
+    <value>前回の値</value>
+  </data>
+  <data name="Claude_Preview" xml:space="preserve">
+    <value>プレビュー（サンプル）</value>
+  </data>
+  <data name="Settings_Providers" xml:space="preserve"><value>サービスの表示</value></data>
+  <data name="Settings_ShowCodex" xml:space="preserve"><value>Codex表示</value></data>
+  <data name="Settings_ShowClaude" xml:space="preserve"><value>Claude Code表示</value></data>
+  <data name="Settings_NoProviders" xml:space="preserve"><value>表示するサービスがありません。設定で表示をオンにしてください。</value></data>
+</root>

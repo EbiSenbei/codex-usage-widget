@@ -8,6 +8,8 @@ public sealed class UsageMonitor : IAsyncDisposable
     private readonly IUsageProvider _provider;
     private readonly TimeSpan _refreshInterval;
     private readonly TimeSpan _requestTimeout;
+    private readonly Func<string, string> _errorFormatter;
+    private readonly Func<string> _timeoutMessage;
     private readonly CancellationTokenSource _lifetime = new();
     private readonly SemaphoreSlim _refreshGate = new(1, 1);
     private Task? _periodicRefreshTask;
@@ -16,11 +18,15 @@ public sealed class UsageMonitor : IAsyncDisposable
     public UsageMonitor(
         IUsageProvider provider,
         TimeSpan? refreshInterval = null,
-        TimeSpan? requestTimeout = null)
+        TimeSpan? requestTimeout = null,
+        Func<string, string>? errorFormatter = null,
+        Func<string>? timeoutMessage = null)
     {
         _provider = provider;
         _refreshInterval = refreshInterval ?? TimeSpan.FromMinutes(2);
         _requestTimeout = requestTimeout ?? TimeSpan.FromSeconds(12);
+        _errorFormatter = errorFormatter ?? UsageTextFormatter.ToFriendlyError;
+        _timeoutMessage = timeoutMessage ?? (() => Strings.Get("Error_ResponseTimeout"));
     }
 
     public event Action? RefreshStarted;
@@ -77,13 +83,16 @@ public sealed class UsageMonitor : IAsyncDisposable
             var snapshot = await _provider.ReadUsageAsync(timeout.Token).ConfigureAwait(false);
             SnapshotUpdated?.Invoke(snapshot);
         }
-        catch (OperationCanceledException) when (!_lifetime.IsCancellationRequested)
+        catch (OperationCanceledException) when (_lifetime.IsCancellationRequested)
         {
-            RefreshFailed?.Invoke(Strings.Get("Error_ResponseTimeout"));
+        }
+        catch (OperationCanceledException)
+        {
+            RefreshFailed?.Invoke(_timeoutMessage());
         }
         catch (Exception ex)
         {
-            RefreshFailed?.Invoke(UsageTextFormatter.ToFriendlyError(ex.Message));
+            RefreshFailed?.Invoke(_errorFormatter(ex.Message));
         }
         finally
         {
@@ -125,8 +134,17 @@ public sealed class UsageMonitor : IAsyncDisposable
             }
         }
 
-        await _provider.DisposeAsync().ConfigureAwait(false);
-        _refreshGate.Dispose();
-        _lifetime.Dispose();
+        // A manual refresh can still be unwinding its cancelled HTTP request at shutdown.
+        await _refreshGate.WaitAsync().ConfigureAwait(false);
+        try
+        {
+            await _provider.DisposeAsync().ConfigureAwait(false);
+        }
+        finally
+        {
+            _refreshGate.Release();
+            _refreshGate.Dispose();
+            _lifetime.Dispose();
+        }
     }
 }

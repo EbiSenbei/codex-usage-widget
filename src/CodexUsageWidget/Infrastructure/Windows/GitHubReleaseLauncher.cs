@@ -6,7 +6,7 @@ namespace CodexUsageWidget.Infrastructure.Windows;
 internal static class GitHubReleaseLauncher
 {
     private const string LatestReleaseUrl =
-        "https://github.com/ognjeeen/codex-usage-widget/releases/latest";
+        "https://github.com/EbiSenbei/codex-usage-widget/releases";
 
     public static bool TryOpenLatestRelease()
     {

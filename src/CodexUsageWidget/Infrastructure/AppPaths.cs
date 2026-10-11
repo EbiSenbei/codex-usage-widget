@@ -6,7 +6,7 @@ public static class AppPaths
 {
     public static string LocalDataDirectory => Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "CodexUsageWidget");
+        "AgentUsageWidget");
 
     public static string DisplayModeFile => Path.Combine(LocalDataDirectory, "display-mode.txt");
 

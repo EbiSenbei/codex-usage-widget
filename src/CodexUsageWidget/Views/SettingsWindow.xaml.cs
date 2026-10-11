@@ -52,6 +52,8 @@ public partial class SettingsWindow : Window
     public event Action<DisplayedLimitPreference>? DisplayedLimitPreferenceChanged;
 
     public event Action<bool>? StartWithWindowsChanged;
+    public event Action<bool>? AlwaysOnTopChanged;
+    public event Action<ProviderVisibility>? ProviderVisibilityChanged;
 
     public event Action<LanguagePreference>? LanguagePreferenceChanged;
 
@@ -90,7 +92,9 @@ public partial class SettingsWindow : Window
     public bool StartWithWindowsEnabled => StartWithWindowsOption.IsChecked == true;
 
     public LanguagePreference SelectedLanguage =>
-        EnglishLanguageOption.IsChecked == true
+        JapaneseLanguageOption.IsChecked == true
+            ? LanguagePreference.Japanese
+            : EnglishLanguageOption.IsChecked == true
             ? LanguagePreference.English
             : SimplifiedChineseLanguageOption.IsChecked == true
                 ? LanguagePreference.SimplifiedChinese
@@ -157,6 +161,7 @@ public partial class SettingsWindow : Window
         _suppressChangeEvents = true;
         SystemLanguageOption.IsChecked = preference == LanguagePreference.System;
         EnglishLanguageOption.IsChecked = preference == LanguagePreference.English;
+        JapaneseLanguageOption.IsChecked = preference == LanguagePreference.Japanese;
         SimplifiedChineseLanguageOption.IsChecked =
             preference == LanguagePreference.SimplifiedChinese;
         _suppressChangeEvents = previousSuppression;
@@ -241,6 +246,40 @@ public partial class SettingsWindow : Window
         if (!_suppressChangeEvents)
         {
             LanguagePreferenceChanged?.Invoke(SelectedLanguage);
+        }
+    }
+
+    public void SetAlwaysOnTop(bool enabled)
+    {
+        var previousSuppression = _suppressChangeEvents;
+        _suppressChangeEvents = true;
+        AlwaysOnTopOption.IsChecked = enabled;
+        _suppressChangeEvents = previousSuppression;
+    }
+
+    public void SetProviderVisibility(ProviderVisibility preference)
+    {
+        var previousSuppression = _suppressChangeEvents;
+        _suppressChangeEvents = true;
+        CodexVisibilityOption.IsChecked = preference.Codex;
+        ClaudeVisibilityOption.IsChecked = preference.Claude;
+        _suppressChangeEvents = previousSuppression;
+    }
+
+    private void ProviderVisibilityOption_OnChanged(object sender, RoutedEventArgs e)
+    {
+        if (!_suppressChangeEvents)
+        {
+            ProviderVisibilityChanged?.Invoke(new ProviderVisibility(
+                CodexVisibilityOption.IsChecked == true, ClaudeVisibilityOption.IsChecked == true));
+        }
+    }
+
+    private void AlwaysOnTopOption_OnChanged(object sender, RoutedEventArgs e)
+    {
+        if (!_suppressChangeEvents)
+        {
+            AlwaysOnTopChanged?.Invoke(AlwaysOnTopOption.IsChecked == true);
         }
     }
 

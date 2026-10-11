@@ -12,11 +12,13 @@ public sealed partial class LocalizationResourceTests
         "CodexUsageWidget.Resources.Strings",
         typeof(Strings).Assembly);
 
-    [Fact]
-    public void EnglishAndSimplifiedChineseHaveMatchingKeysAndPlaceholders()
+    [Theory]
+    [InlineData("zh-CN")]
+    [InlineData("ja-JP")]
+    public void SupportedLanguagesHaveMatchingKeysAndPlaceholders(string cultureName)
     {
         var english = ReadResources(CultureInfo.InvariantCulture);
-        var chinese = ReadResources(CultureInfo.GetCultureInfo("zh-CN"));
+        var chinese = ReadResources(CultureInfo.GetCultureInfo(cultureName));
 
         Assert.Equal(english.Keys.Order(), chinese.Keys.Order());
         foreach (var key in english.Keys)
@@ -30,6 +32,7 @@ public sealed partial class LocalizationResourceTests
     [Fact]
     public void ResourceManagerUsesChineseAndFallsBackToEnglish()
     {
+        Assert.Equal("設定", Resources.GetString("Common_Settings", CultureInfo.GetCultureInfo("ja-JP")));
         Assert.Equal(
             "设置",
             Resources.GetString("Common_Settings", CultureInfo.GetCultureInfo("zh-CN")));
