@@ -22,6 +22,8 @@ including tray tooltips. Preferences survive restarts; automatic polling continu
 while hidden. Both can be hidden, and Settings remains available to restore them.
 The app stays in the system tray. The minus button hides it and enables the small
 Codex taskbar label; the close button exits it. Tray click opens the full widget.
+With **Always on top** enabled, the opened widget stays visible when switching to
+another app, including in taskbar indicator mode.
 The tray icon and taskbar number show the selected Codex limit; the tray tooltip
 also reports Claude usage. Both providers' full limits are visible in the main window.
 

@@ -4,6 +4,30 @@ namespace CodexUsageWidget.Tests;
 
 public sealed class WidgetVisibilityControllerTests
 {
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public void DeactivationRespectsAlwaysOnTop(bool alwaysOnTop)
+    {
+        var visible = true;
+        var controller = new WidgetVisibilityController(
+            () => visible,
+            () => visible = true,
+            () => visible = false);
+
+        controller.HideOnDeactivated(
+            taskbarInteractionInProgress: false,
+            alwaysOnTop: alwaysOnTop);
+
+        Assert.Equal(alwaysOnTop, visible);
+        // Explicit dismissal must still work for a pinned widget.
+        if (visible)
+        {
+            controller.Toggle();
+            Assert.False(visible);
+        }
+    }
+
     [Fact]
     public void ConsecutiveTogglesShowThenHideWidget()
     {

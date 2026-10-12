@@ -17,9 +17,10 @@ public sealed class WidgetVisibilityController
 
     public void HideOnDeactivated(
         bool taskbarInteractionInProgress,
-        bool ownedDialogOpen = false)
+        bool ownedDialogOpen = false,
+        bool alwaysOnTop = false)
     {
-        if (!taskbarInteractionInProgress && !ownedDialogOpen)
+        if (!taskbarInteractionInProgress && !ownedDialogOpen && !alwaysOnTop)
         {
             _hide();
         }

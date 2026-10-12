@@ -655,7 +655,8 @@ public partial class MainWindow : Window
         {
             _widgetVisibility.HideOnDeactivated(
                 _taskbarLabel.IsPointerOver,
-                ownedDialogOpen: _isSettingsOpen || _isResetDialogOpen);
+                ownedDialogOpen: _isSettingsOpen || _isResetDialogOpen,
+                alwaysOnTop: Topmost);
         }
     }
 
